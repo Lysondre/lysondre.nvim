@@ -5,7 +5,7 @@ return {
             'nvim-tree/nvim-web-devicons',
         },
         opts = function()
-            local dashboard = require('alpha.themes.dashboard')
+            local dashboard = require 'alpha.themes.dashboard'
 
             local logo = [[
   ███╗   ██╗██╗   ██╗ █████╗ ██╗   ██╗██╗███╗   ███╗
@@ -29,7 +29,7 @@ return {
             }
         end,
         config = function()
-            local dashboard = require('alpha.themes.dashboard')
+            local dashboard = require 'alpha.themes.dashboard'
 
             require('alpha').setup(dashboard.config)
         end,

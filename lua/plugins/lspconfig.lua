@@ -1,7 +1,7 @@
 function hover()
-    vim.lsp.buf.hover({
+    vim.lsp.buf.hover {
         border = 'rounded',
-    })
+    }
 end
 
 return {
@@ -61,7 +61,7 @@ return {
                             group = vim.api.nvim_create_augroup('lsp-detach', { clear = true }),
                             callback = function(event2)
                                 vim.lsp.buf.clear_references()
-                                vim.api.nvim_clear_autocmds({ group = 'lsp-highlight', buffer = event2.buf })
+                                vim.api.nvim_clear_autocmds { group = 'lsp-highlight', buffer = event2.buf }
                             end,
                         })
                     end
@@ -99,9 +99,9 @@ return {
                 'stylua',
             })
 
-            require('mason-tool-installer').setup({ ensure_installed = ensured_installed })
+            require('mason-tool-installer').setup { ensure_installed = ensured_installed }
 
-            require('mason-lspconfig').setup({
+            require('mason-lspconfig').setup {
                 handlers = {
                     function(server_name)
                         local server = servers[server_name] or {}
@@ -111,7 +111,7 @@ return {
                         require('lspconfig')[server_name].setup(server)
                     end,
                 },
-            })
+            }
         end,
     },
 }
