@@ -255,6 +255,11 @@ def main():
             if not fake_install:
                 function()
 
+    print("Adding .local/bin to path")
+
+    with open(str(Path("~/.bashrc").expanduser()), "a") as file:
+        _ = file.write('export PATH="$PATH:~/.local/bin"')
+
     print("Done")
 
 
