@@ -3,7 +3,6 @@
 import os
 import shutil
 import subprocess
-import sys
 from abc import ABC, abstractmethod
 from pathlib import Path
 
@@ -71,6 +70,7 @@ class UbuntuInstaller(Installer):
         super().__init__()
 
         self.installed_programs: frozenset[str] = self.load_installed_programs()
+        _ = subprocess.run(["apt", "update"])
 
     def load_installed_programs(self) -> frozenset[str]:
         results = subprocess.run(
