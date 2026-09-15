@@ -12,8 +12,13 @@ from collections.abc import Callable
 
 InstallCallback = Callable[[], None]
 
+skip_confirm = True
+
 
 def ask_confirm() -> bool:
+    if skip_confirm:
+        return True
+
     resp = input("Confirm to proceed: [y/N] ").lower()
 
     return resp == "y"
