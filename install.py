@@ -85,7 +85,7 @@ class UbuntuInstaller(Installer):
         return program in self.installed_programs
 
     def get_install_command(self) -> list[str]:
-        return ["apt", "install"] + self.normal_installs
+        return ["apt", "install", "-y"] + self.normal_installs
 
 
 def install_remote_tar(url: str, name: str, executable: str, gz: bool = True):
