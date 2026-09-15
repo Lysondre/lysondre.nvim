@@ -22,5 +22,5 @@ vim.keymap.set('n', 'K', hover, { desc = 'Show Hover Docs' })
 
 local snacks = require 'snacks'
 
-vim.keymap.set('n', '<leader>e', snacks.explorer.open, { desc = 'Open explorer' })
+vim.keymap.set('n', '<leader>e', Snacks.explorer.open, { desc = 'Open explorer' })
 vim.keymap.set('n', '<leader>lg', snacks.lazygit.open, { desc = 'Open LazyGit' })

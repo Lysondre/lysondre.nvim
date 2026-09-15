@@ -11,5 +11,7 @@ return {
             },
         },
         lazygit = {},
+        indent = {},
+        images = {},
     },
 }
