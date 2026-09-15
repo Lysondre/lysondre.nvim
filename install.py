@@ -5,7 +5,7 @@ import sys
 from abc import ABC, abstractmethod
 from pathlib import Path
 
-from typing import Literal, override
+from typing import Literal
 from collections.abc import Callable
 
 InstallCallback = Callable[[], None]
@@ -52,11 +52,9 @@ class ArchInstaller(Installer):
 
         return frozenset(results)
 
-    @override
     def check_installed(self, program: str) -> bool:
         return program in self.installed_programs
 
-    @override
     def get_install_command(self) -> list[str]:
         return ["pacman", "-s"] + self.normal_installs
 
@@ -76,11 +74,9 @@ class UbuntuInstaller(Installer):
 
         return frozenset(results)
 
-    @override
     def check_installed(self, program: str) -> bool:
         return program in self.installed_programs
 
-    @override
     def get_install_command(self) -> list[str]:
         return ["apt", "install"] + self.normal_installs
 
@@ -174,6 +170,12 @@ DEPS = {
     },
 }
 
+# some packages that are OS specific
+OS_PACKAGES = {
+    "arch": [],
+    "ubuntu": ["python3-venv"],
+}
+
 
 def get_distro() -> Literal["ubuntu", "arch", "unsupported"]:
     if os.path.exists("/etc/os-release"):
@@ -211,6 +213,10 @@ def main():
             installer.add_package_install(program)
         else:
             installer.add_special_install(program, commands[distro])
+
+    for program in OS_PACKAGES[distro]:
+        if not installer.check_installed(program):
+            installer.add_package_install(program)
 
     if len(installer.normal_installs) <= 0:
         print("Nothing to install in package manager...")
